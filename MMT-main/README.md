@@ -3,22 +3,21 @@
 
 I. 📦 THÀNH PHẦN FILE
 
-| Tên tệp              | Mục đích                                           |
-|----------------------|----------------------------------------------------|
-| tracker_full_server.py | Tracker Flask lưu Peer và xác thực người dùng     |
-| run_all_cli.py         | Giao diện CLI: login, upload, download            |
-| peer_server.py         | Seeder riêng: chia sẻ file                        |
-| peer_download.py       | Downloader riêng: tải và resume                   |
-| torrent_creator.py     | Tạo file .torrent từ file hoặc thư mục            |
+| Tên tệp                | Mục đích                                      |
+| ---------------------- | --------------------------------------------- |
+| tracker_full_server.py | Tracker Flask lưu Peer và xác thực người dùng |
+| peer.py                | Seeder riêng: chia sẻ file                    |
 
 II. 🛠 CÀI ĐẶT
 
 Yêu cầu:
+
 - Python >= 3.9
 - Các thư viện:
-    pip install flask requests
+  pip install flask requests
 
 Cấu trúc thư mục:
+
 - shared/: chứa file hoặc thư mục chia sẻ
 - torrents/: chứa file .torrent đã tạo
 - downloads/: chứa file tải về từ các peer
@@ -27,34 +26,27 @@ Cấu trúc thư mục:
 III. 🚀 CÁCH CHẠY HỆ THỐNG
 
 1. 🔗 CHẠY TRACKER SERVER
+
    - Trên máy chủ:
      python tracker_full_server.py
    - Tracker lắng nghe tại http://<IP>:5000
 
 2. 🧑 ĐĂNG KÝ TÀI KHOẢN (qua API hoặc Thunder Client)
+
    - POST /register
    - Body:
      {
-       "username": "user1",
-       "password": "123456"
+     "username": "user1",
+     "password": "123456"
      }
 
-3. 💻 PEER GIAO DIỆN CLI
-   - Trên mỗi máy peer:
-     python run_all_cli.py
-   - Nhập IP tracker
-   - Đăng nhập
-   - Chọn Upload hoặc Download
-
-4. 📡 CHẠY SEEDER RIÊNG
-   - Chia sẻ file nếu không dùng CLI:
-     python peer_server.py
-   - Nhập đường dẫn file .torrent
-
-5. 📥 CHẠY DOWNLOADER RIÊNG
-   - Tải file độc lập từ .torrent:
-     python peer_download.py
-   - Tự động resume nếu có file dở
+3. 📡 CHẠY SEEDER
+   - Chia sẻ file:
+     python peer.py
+     Nhập đường dẫn file .torrent
+   - Tải file:
+     python peer.py
+     Chọn file muốn tải
 
 IV. 🔁 TÍNH NĂNG RESUME
 
